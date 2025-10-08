@@ -1,0 +1,124 @@
+@import url(./animation.css);
+@import url(./animate.css);
+
+*{
+    margin: 0;
+    padding:0;
+    font-family: inter;
+    box-sizing: border-box;
+    color: whitesmoke;
+    text-decoration: none;
+}
+.title{
+    font-size: 3rem;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: #111111;
+    height: 100vh;
+}
+
+/* Lists */
+ul{
+    list-style: outside;
+}
+li{
+    margin-top: 12px;
+    transition: transform 0.2s ease-in-out;
+}
+li a{
+    color:#c0c0c0;
+    transition: color 0.3 ease;
+    transition: color 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
+    display: inline-block; 
+}
+li a:hover{
+    font-size: 1.1rem;
+    color: #f1f1f1;
+    transform: translateX(10px);
+}
+.divList{ 
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+    min-width: 600px;
+    overflow-y: auto;
+    background-color: rgb(44, 38, 41);
+    padding: 40px;
+    border-radius: 15px;
+    border: 3px solid #cf1892;
+}
+.filesUpload{
+    justify-content: space-between;
+}
+button{
+    color: #f5f5f5;
+    border: 2px solid whitesmoke;
+    cursor: pointer;
+    font-size: 1.2rem;
+    width: 100px;
+    height: 50px;
+    background-color: #cf1892;
+    border-radius: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.folderButton{
+    width: 50px;
+}
+.file-input-label {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #f5f5f5;
+    background-color: #cf1892;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: 2px solid whitesmoke;
+    display: inline-block;
+    margin-right: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.file-input-label:hover, button:hover{
+    background-color: #772e8a;
+}
+#file-name {
+    color: white;
+    font-style: italic;
+}
+#file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.back-button {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: rgb(44, 30, 37);;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+.back-button:hover {
+    background-color: #7c2c5b;
+}
+input[type=text]{
+    padding: 10px;
+    background-color: rgb(44, 38, 41);
+    border-radius: 15px;
+    border: 2px solid rgb(196, 196, 196);
+
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+input[type=text]:focus{
+    outline: none;
+    border-color: #cf1892;
+}

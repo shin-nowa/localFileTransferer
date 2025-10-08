@@ -1,0 +1,73 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <link rel = "stylesheet" href = "{% static 'style/style.css' %}">
+    <link rel = "stylesheet" href = "{% static 'style/animation.css' %}">
+    <title>Local File Transferer</title>
+    </head>
+<body>
+    <div class="container">
+        <h1 class="title animate__slideInUp">Local File Transferer</h1>
+        
+        <div class="change-dir-container">
+            <form action="{% url 'change_dir' %}" method="post">
+                {% csrf_token %}
+                <label for="new_path">Please set the folder path.</label>
+                <input type="text" name="new_path" id="new_path" value="{{ current_base_directory|default:'' }}" placeholder="Ex: D:/Musicss ou C:/Users/Downloads" required>
+                <button class="folderButton" type="submit" title="Change Directory">📂</button>
+            </form>
+        </div>
+
+        {% if current_base_directory %}
+            <div class="divList">
+                
+                <h2>Index from: /{{ current_base_directory }}</h2>
+
+                {% if current_path %}
+                    <div class="back-button-container">
+                        <a href="{% if parent_path %}{% url 'browse_subpath' subpath=parent_path %}{% else %}{% url 'browse_root' %}{% endif %}" class="back-button">&larr; Voltar</a>
+                    </div>
+                {% endif %}
+
+                <ul id="file-list" data-current-path="{{ current_path }}">
+                    {% for item in items %}
+                        <li>
+                            {% if item.is_dir %}
+                                <a class="folder" href="{% url 'browse_subpath' subpath=current_path|add:item.name|add:'/' %}">{{ item.name }}/</a>
+                                <a href="{% url 'download_folder' folderpath=current_path|add:item.name %}">(Download .zip)</a>
+                            {% else %}
+                                <a class="file" href="{% url 'download_file' filepath=current_path|add:item.name %}">{{ item.name }}</a>
+                            {% endif %}
+                        </li>
+                    {% empty %}
+                        <li id="empty-folder-message">Empty Folder.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <div class="divList welcome-message">
+                <h2>Welcome!</h2>
+                <p>To get started, paste a folder path above.</p>
+            </div>
+        {% endif %}
+        {% if current_base_directory %}
+            <div class="upload-section">
+                <h2>File Upload</h2>
+                <form id="upload-form" action="{% url 'upload_file' subpath=current_path %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="filesUpload">
+                        <label for="file-input" class="file-input-label">Choose File</label>
+                        <span id="file-name">No file selected.</span>
+                        <button type="submit">Upload</button>
+                    </div>
+                    <input type="file" name="file" id="file-input" required>
+                </form>
+                <div id="upload-status"></div>
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="{% static 'script/gerenciador.js' %}"></script>
+</body>
+</html>

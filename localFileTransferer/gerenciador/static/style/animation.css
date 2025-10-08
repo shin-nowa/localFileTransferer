@@ -1,0 +1,14 @@
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to{
+        opacity: 100;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-element {
+  animation: fadeIn 0.8s ease-in-out;
+}
