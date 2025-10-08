@@ -1,5 +1,9 @@
 #  🇧🇷 🇺🇸 Local File Transferer #
 
+<div align="center">
+  <img src=".\localFileTransferer\assets\print.png" alt="Demonstração do Local File Transferer" width="700">
+</div>
+
 ## Servidor Local para transferência de arquivos entre dispositivos ##
 ### Criado utilizando Python (Django) ###
 
