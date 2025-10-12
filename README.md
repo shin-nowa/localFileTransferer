@@ -23,8 +23,8 @@
 ``` bash
   python manage.py createsuperuser
 ```
-6. **Edite o arquivo  `.env`:**
-Abra o arquivo `.env` em `/localFileTransferer/.env` e substitua o texto `YOUR_IP` pelo seu endereço de IPv4 local.
+6. **Edite o arquivo  `.env.example`:**
+Renomeie o arquivo `.env.example` para `.env` em `/localFileTransferer/.env`, abra com um editor e substitua o texto `YOUR_IP` pelo seu endereço de IPv4 local.
 
     > ⚠️ **Importante:** Não apague `127.0.0.1` ou `localhost`. Apenas adicione seu IP à lista, separado por vírgulas.
 
@@ -50,8 +50,8 @@ Abra o arquivo `.env` em `/localFileTransferer/.env` e substitua o texto `YOUR_I
 ``` bash
   python manage.py createsuperuser
 ```
-6. **Editing the file `.env`:**
-Open the file `.env` located on `/localFileTransferer/.env` and replace the text `YOUR_IP` by your local IPv4 IP.
+6. **Editing the file `.env.example`:**
+Rename the file named `.env.example` to `.env` located on `/localFileTransferer/.env`, open with a text editor and replace the text `YOUR_IP` by your local IPv4 IP.
 
     > ⚠️ **Important:** DO NOT DELETE `127.0.0.1` or `localhost`. Only add your ip to the list with commas.
 
