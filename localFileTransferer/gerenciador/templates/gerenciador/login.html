@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Local File Transferer</title>
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+</head>
+<body class="login-page">
+    <div class="containerLogin login-form">
+        <h2>Login</h2>
+        <p>Please login with your credentials.</p>
+
+        {% if form.errors %}
+            <p class="error-message">User or password incorrect. Try again.</p>
+        {% endif %}
+        <div class="formLogin">
+            <form id = "formClass" method="post">
+                {% csrf_token %}        
+                
+                {{ form.as_p }}
+
+            </div>
+                <button type="submit">Login</button>
+            </form>
+    </div>
+</body>
+</html>

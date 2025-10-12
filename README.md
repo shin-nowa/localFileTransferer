@@ -19,7 +19,24 @@
  ``` bash
     python manage.py migrate
 ```
-5. Execute o servidor (` python manage.py runserver `)
+5. Crie seu usuário com:
+``` bash
+  python manage.py createsuperuser
+```
+6. **Edite o arquivo  `.env`:**
+Abra o arquivo `.env` em `/localFileTransferer/.env` e substitua o texto `YOUR_IP` pelo seu endereço de IPv4 local.
+
+    > ⚠️ **Importante:** Não apague `127.0.0.1` ou `localhost`. Apenas adicione seu IP à lista, separado por vírgulas.
+
+    **Exemplo:**
+    ```ini
+    # Antes:
+    ALLOWED_HOSTS_CSV=,127.0.0.1,localhost, YOUR_IP
+
+    # Depois:
+    ALLOWED_HOSTS_CSV=127.0.0.1,localhost, 10.0.0.1
+    ```
+7. Execute o servidor (` python manage.py runserver `)
 
 # 🇺🇸 Usage #
 1. Clone the repository.
@@ -29,4 +46,21 @@
  ``` bash
     python manage.py migrate
 ```
-5. Execute the server (` python manage.py runserver `).
+5. Create your user with:
+``` bash
+  python manage.py createsuperuser
+```
+6. **Editing the file `.env`:**
+Open the file `.env` located on `/localFileTransferer/.env` and replace the text `YOUR_IP` by your local IPv4 IP.
+
+    > ⚠️ **Important:** DO NOT DELETE `127.0.0.1` or `localhost`. Only add your ip to the list with commas.
+
+    **Exemplo:**
+    ```ini
+    # Before:
+    ALLOWED_HOSTS_CSV=,127.0.0.1,localhost, YOUR_IP
+
+    # After:
+    ALLOWED_HOSTS_CSV=127.0.0.1,localhost, 10.0.0.1
+    ```
+7. Execute the server (` python manage.py runserver `)

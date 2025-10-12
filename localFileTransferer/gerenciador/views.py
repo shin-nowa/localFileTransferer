@@ -1,6 +1,7 @@
 import os
 import io
 import zipfile
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseForbidden, FileResponse, JsonResponse
@@ -10,7 +11,7 @@ def is_path_safe(path):
     base_path = os.path.realpath(settings.BASE_DIRECTORY)
     requested_path = os.path.realpath(path)
     return requested_path.startswith(base_path)
-
+@login_required
 def browse(request, subpath=''):
     base_dir_from_session = request.session.get('base_directory')
     
