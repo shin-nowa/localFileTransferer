@@ -6,6 +6,7 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseForbidden, FileResponse, JsonResponse
 from django.urls import reverse
+from .models import TransferLog
 
 def is_path_safe(path):
     base_path = os.path.realpath(settings.BASE_DIRECTORY)
@@ -49,13 +50,19 @@ def change_directory(request):
             
     return redirect('browse_root')
 
+@login_required
 def download_file_view(request, filepath):
     base_dir = request.session.get('base_directory', settings.BASE_DIRECTORY)
     full_path = os.path.join(base_dir, filepath)
     
     if not os.path.realpath(full_path).startswith(os.path.realpath(base_dir)) or not os.path.isfile(full_path):
         raise Http404('File not Found')
-    
+    TransferLog.objects.create(
+        user=request.user,
+        action='DOWNLOAD',
+        file_name=os.path.basename(full_path), # Pega só o nome do arquivo
+        ip_address=get_client_ip(request)
+    )
     return FileResponse(open(full_path, 'rb'), as_attachment=True)
 
 def download_folder_view(request, folderpath):
@@ -77,6 +84,7 @@ def download_folder_view(request, folderpath):
     response['Content-Disposition'] = f'attachment; filename="{os.path.basename(folderpath)}.zip"'
     return response
 
+@login_required
 def upload_file_view(request, subpath=''):
     base_dir = request.session.get('base_directory', settings.BASE_DIRECTORY)
     
@@ -93,6 +101,12 @@ def upload_file_view(request, subpath=''):
                 with open(os.path.join(upload_path, uploaded_file.name), 'wb+') as destination:
                     for chunk in uploaded_file.chunks():
                         destination.write(chunk)
+                        TransferLog.objects.create(
+                    user=request.user,
+                    action='UPLOAD',
+                    file_name=uploaded_file.name,
+                    ip_address=get_client_ip(request)
+                        )
                 return JsonResponse({
                     'success': True,
                     'filename': uploaded_file.name,
@@ -105,3 +119,11 @@ def upload_file_view(request, subpath=''):
         return redirect(reverse('browse_subpath', kwargs={'subpath': subpath}))
     else:
         return redirect(reverse('browse_root'))
+    
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDEDF_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
