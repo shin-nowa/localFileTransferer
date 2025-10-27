@@ -36,7 +36,7 @@ Renomeie o arquivo `.env.example` para `.env` em `/localFileTransferer/.env`, ab
     # Depois:
     ALLOWED_HOSTS_CSV=127.0.0.1,localhost, 10.0.0.1
     ```
-7. Execute o servidor (` python manage.py runserver `)
+7. Execute o servidor (` python manage.py runserver 0.0.0.0:8000 `)
 
 # 🇺🇸 Usage #
 1. Clone the repository.
@@ -63,4 +63,4 @@ Rename the file named `.env.example` to `.env` located on `/localFileTransferer/
     # After:
     ALLOWED_HOSTS_CSV=127.0.0.1,localhost, 10.0.0.1
     ```
-7. Execute the server (` python manage.py runserver `)
+7. Execute the server (` python manage.py runserver 0.0.0.0:8000 `)
