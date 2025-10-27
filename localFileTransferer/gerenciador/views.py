@@ -6,7 +6,7 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseForbidden, FileResponse, JsonResponse
 from django.urls import reverse
-from .models import TransferLog
+from .models import TransferLog, UserProfile
 
 def is_path_safe(path):
     base_path = os.path.realpath(settings.BASE_DIRECTORY)
@@ -14,14 +14,15 @@ def is_path_safe(path):
     return requested_path.startswith(base_path)
 @login_required
 def browse(request, subpath=''):
-    base_dir_from_session = request.session.get('base_directory')
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+    base_dir_from_profile = profile.active_directory
     
     items = []
     parent_path = None
     
-    if base_dir_from_session:
-        current_path = os.path.join(base_dir_from_session, subpath)
-        if not os.path.realpath(current_path).startswith(os.path.realpath(base_dir_from_session)):
+    if base_dir_from_profile:
+        current_path = os.path.join(base_dir_from_profile, subpath)
+        if not os.path.realpath(current_path).startswith(os.path.realpath(base_dir_from_profile)):
             return HttpResponseForbidden("Access denied.")
 
         if not os.path.isdir(current_path):
@@ -40,19 +41,24 @@ def browse(request, subpath=''):
             else:
                 parent_path = ''
     
-    context = {'items': items, 'current_path': subpath, 'parent_path': parent_path, 'current_base_directory': base_dir_from_session}
+    context = {'items': items, 'current_path': subpath, 'parent_path': parent_path, 'current_base_directory': base_dir_from_profile}
     return render(request, 'gerenciador/index.html', context)
+
+@login_required
 def change_directory(request):
     if request.method == 'POST':
         new_path = request.POST.get('new_path', '')
         if os.path.isdir(new_path):
-            request.session['base_directory'] = new_path
+            profile, created = UserProfile.objects.get_or_create(user=request.user)
+            profile.active_directory = new_path
+            profile.save()
             
     return redirect('browse_root')
 
 @login_required
 def download_file_view(request, filepath):
-    base_dir = request.session.get('base_directory', settings.BASE_DIRECTORY)
+    profile, created = UserProfile.objects.get_or_create(user=  request.user)
+    base_dir = profile.active_directory
     full_path = os.path.join(base_dir, filepath)
     
     if not os.path.realpath(full_path).startswith(os.path.realpath(base_dir)) or not os.path.isfile(full_path):
@@ -66,7 +72,8 @@ def download_file_view(request, filepath):
     return FileResponse(open(full_path, 'rb'), as_attachment=True)
 
 def download_folder_view(request, folderpath):
-    base_dir = request.session.get('base_directory', settings.BASE_DIRECTORY)
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+    base_dir = profile.active_directory
     full_path = os.path.join(base_dir, folderpath)
     if not os.path.realpath(full_path).startswith(os.path.realpath(base_dir)) or not os.path.isdir(full_path):
         raise Http404("Folder Not Found.")
@@ -86,7 +93,8 @@ def download_folder_view(request, folderpath):
 
 @login_required
 def upload_file_view(request, subpath=''):
-    base_dir = request.session.get('base_directory', settings.BASE_DIRECTORY)
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+    base_dir = profile.active_directory
     
     upload_path = os.path.join(settings.BASE_DIRECTORY, subpath)
     if not os.path.realpath(upload_path).startswith(os.path.realpath(base_dir)):
