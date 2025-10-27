@@ -2,59 +2,77 @@ const form = document.getElementById("upload-form");
 const fileInput = document.getElementById("file-input");
 const fileList = document.getElementById("file-list");
 const statusMessage = document.getElementById("upload-status");
-const currentPath = fileList.dataset.currentPath;
 const fileNameSpan = document.getElementById('file-name');
 
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
+// Só executa o código se os elementos do formulário existirem nesta página
+if (form && fileInput && fileList && statusMessage && fileNameSpan) {
+    
+    const currentPath = fileList.dataset.currentPath;
 
-  statusMessage.textContent = "Enviando arquivo...";
+    // --- Lógica de Upload (CSRF) ---
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Impede o envio normal do formulário
 
-  const formData = new FormData(form);
+        const csrfToken = form.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
-  fetch(form.action, {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        statusMessage.textContent = `Arquivo "${data.filename}" enviado com sucesso!`;
+        statusMessage.textContent = "Uploading file...";
 
-        const newLi = document.createElement("li");
-        const newLink = document.createElement("a");
+        const formData = new FormData(form);
 
-        newLink.className = "file";
-        newLink.textContent = data.filename;
+        fetch(form.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrfToken
+            }
+        })
+        .then(response => {
+            // Adiciona uma verificação para erros HTTP (como 404, 500)
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            // Se o servidor retornar algo que não é JSON (como uma página de erro HTML),
+            // isso também pode causar um erro que será pego pelo .catch()
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                statusMessage.textContent = `File "${data.filename}" uploaded successfully!`;
 
-        newLink.href = `/download/file/${currentPath}${data.filename}`;
+                const newLi = document.createElement("li");
+                const newLink = document.createElement("a");
 
-        newLi.appendChild(newLink);
-        fileList.appendChild(newLi);
+                newLink.className = "file";
+                newLink.textContent = data.filename;
 
-        const emptyMessage = document.getElementById("empty-folder-message");
-        if (emptyMessage) {
-          emptyMessage.remove();
-        }
+                newLink.href = `/download/file/${currentPath}${data.filename}`;
 
-        fileInput.value = "";
-      } else {
-        statusMessage.textContent = `Erro: ${data.error}`;
-      }
-    })
-    .catch((error) => {
-      console.error("Erro:", error);
-      statusMessage.textContent = "Ocorreu um erro de rede. Tente novamente.";
+                newLi.appendChild(newLink);
+                fileList.appendChild(newLi);
+
+                const emptyMessage = document.getElementById("empty-folder-message");
+                if (emptyMessage) {
+                    emptyMessage.remove();
+                }
+
+                fileInput.value = "";
+            } else {
+                statusMessage.textContent = `Error: ${data.error}`;
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            statusMessage.textContent = "A network error occurred. Please try again."; 
+        });
     });
-});
 
+    // --- Lógica para mostrar o nome do arquivo ---
+    fileInput.addEventListener('change', function() {
+        if (fileInput.files.length > 0) {
+            fileNameSpan.textContent = fileInput.files[0].name;
+        } else {
+            fileNameSpan.textContent = 'No file selected';
+        }
+    });
 
-// file name
-
-fileInput.addEventListener('change', function() {
-  if (fileInput.files.length > 0) {
-    fileNameSpan.textContent = fileInput.files[0].name;
-  } else {
-    fileNameSpan.textContent = 'No file selected';
-  }
-});
+}

@@ -96,7 +96,7 @@ def upload_file_view(request, subpath=''):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
     base_dir = profile.active_directory
     
-    upload_path = os.path.join(settings.BASE_DIRECTORY, subpath)
+    upload_path = os.path.join(base_dir, subpath)
     if not os.path.realpath(upload_path).startswith(os.path.realpath(base_dir)):
         return HttpResponseForbidden("Acess Denied")
 
@@ -109,12 +109,12 @@ def upload_file_view(request, subpath=''):
                 with open(os.path.join(upload_path, uploaded_file.name), 'wb+') as destination:
                     for chunk in uploaded_file.chunks():
                         destination.write(chunk)
-                        TransferLog.objects.create(
+                TransferLog.objects.create(
                     user=request.user,
                     action='UPLOAD',
                     file_name=uploaded_file.name,
                     ip_address=get_client_ip(request)
-                        )
+                )
                 return JsonResponse({
                     'success': True,
                     'filename': uploaded_file.name,
@@ -129,7 +129,7 @@ def upload_file_view(request, subpath=''):
         return redirect(reverse('browse_root'))
     
 def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDEDF_FOR')
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
     else:
