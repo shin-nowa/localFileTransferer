@@ -1,7 +1,9 @@
-- Login []
-- Finalizar estilização []
-- Adicionar mais funcionalidades []
-- Adicionar condicionais para não subir arquivos antes de selecionar o diretório []
-- Adicionar lista de IPs ou usuários que estão visualizando os arquivos []
-- Adicionar praticidade para o funcionamento inicial []
+- Login [X]
+- Finalizar estilização [X]
+- Adicionar mais funcionalidades [X]
+- Adicionar condicionais para não subir arquivos antes de selecionar o diretório [X]
+- Adicionar lista de IPs ou usuários que estão visualizando os arquivos [X]
+- Adicionar praticidade para o funcionamento inicial [X]
 - Adicionar responsividade []
+- Adicionar página de Perfil mostrando quantidade de arquivos e tamanho transferidos.
+- Adicionar página de Sobre/ contato.
