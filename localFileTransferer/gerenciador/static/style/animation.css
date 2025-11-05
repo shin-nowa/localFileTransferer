@@ -12,3 +12,7 @@
 .fade-in-element {
   animation: fadeIn 0.8s ease-in-out;
 }
+
+@keyframes slide-fwd-center{0%{transform:translateZ(0)}100%{transform:translateZ(160px)}}
+@keyframes slide-bck-center{0%{transform:translateZ(160px)}100%{transform:translateZ(0)}}
+@keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 rgba(0,0,0,.35)}}
