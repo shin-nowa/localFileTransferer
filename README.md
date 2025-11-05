@@ -15,15 +15,19 @@
 1. Clone o repositório.
 2. Crie e ative um ambiente virtual (venv).
 3. Instale as dependências (` pip install -r requirements.txt `)
-4. Execute as migrações para criar um banco de dados local:
+4. Navege para a pasta localFileTransferer  
+``` bash
+    cd localFileTransferer
+```
+5. Execute as migrações para criar um banco de dados local:
  ``` bash
     python manage.py migrate
 ```
-5. Crie seu usuário com:
+6. Crie seu usuário com:
 ``` bash
   python manage.py createsuperuser
 ```
-6. **Edite o arquivo  `.env.example`:**
+7. **Edite o arquivo  `.env.example`:**
 Renomeie o arquivo `.env.example` para `.env` em `/localFileTransferer/.env`, abra com um editor e substitua o texto `YOUR_IP` pelo seu endereço de IPv4 local.
 
     > ⚠️ **Importante:** Não apague `127.0.0.1` ou `localhost`. Apenas adicione seu IP à lista, separado por vírgulas.
@@ -42,15 +46,19 @@ Renomeie o arquivo `.env.example` para `.env` em `/localFileTransferer/.env`, ab
 1. Clone the repository.
 2. Create and activave a virtual enviroment (venv).
 3. Install dependencies. (` pip install -r requirements.txt `)
-4. Execute migrations to create a local database:
+4. Navigate to the folder localFileTransferer  
+``` bash
+    cd localFileTransferer
+```
+5. Execute migrations to create a local database:
  ``` bash
     python manage.py migrate
 ```
-5. Create your user with:
+6. Create your user with:
 ``` bash
   python manage.py createsuperuser
 ```
-6. **Editing the file `.env.example`:**
+7. **Editing the file `.env.example`:**
 Rename the file named `.env.example` to `.env` located on `/localFileTransferer/.env`, open with a text editor and replace the text `YOUR_IP` by your local IPv4 IP.
 
     > ⚠️ **Important:** DO NOT DELETE `127.0.0.1` or `localhost`. Only add your ip to the list with commas.
