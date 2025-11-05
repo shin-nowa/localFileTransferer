@@ -19,6 +19,8 @@
     justify-content: flex-end;
     align-items: center;
     margin-right: 10vw;
+}
+.logout-form{
     perspective: 800px;
 }
 .logout-button{
@@ -27,10 +29,10 @@
     height: 40px;
     margin-left: 20px;
     transform: translateZ(0);
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 .logout-button:hover{
-    transform: translateZ(160px);
+    transform: translateZ(60px);
 }
 .title{
     font-size: 3rem;
@@ -67,7 +69,7 @@ li a:hover{
     display: flex;
     flex-direction: column;
     min-width: 600px;
-    max-width: 1000px;
+    max-width: 800px;
     min-height: 0;
     max-height: 90vh;
     background-color: rgb(44, 38, 41);
@@ -96,6 +98,7 @@ li a:hover{
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    perspective: 800px;
 }
 button{
     color: #f5f5f5;
@@ -107,6 +110,7 @@ button{
     background-color: #cf1892;
     border-radius: 15px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    transform: translateZ(0);
 }
 .folderButton{
     width: 50px;
@@ -125,6 +129,7 @@ button{
 }
 .file-input-label:hover, button:hover{
     background-color: #772e8a;
+    transform: translateZ(60px);
 }
 #file-name {
     color: white;
