@@ -10,7 +10,7 @@
     <div class="user-info">
         <span>Hello, {{ user.username }}!</span>
         
-        <form action="{% url 'logout' %}" method="post">
+        <form action="{% url 'logout' %}" method="post" class="logout-form">
             {% csrf_token %}
             <button type="submit" class="logout-button">Logout</button>
         </form>
