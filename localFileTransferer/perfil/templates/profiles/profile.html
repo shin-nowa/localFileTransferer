@@ -1,0 +1,65 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>Perfil — {{ user_full_name }}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="{% static 'style/profile.css' %}">
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-header">
+      <img src="{{ profile_image_url }}" alt="Avatar" class="avatar">
+      <div class="user-info">
+        <h1>{{ user_full_name }}</h1>
+        <p>Usuário: {{ request.user.username }}</p>
+        <p>Email: {{ request.user.email }}</p>
+      </div>
+    </div>
+
+    <section class="upload-form">
+      <h3>Alterar foto de perfil</h3>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.image }}
+        <button type="submit">Enviar</button>
+      </form>
+      {% if upload_error %}
+        <div class="error">{{ upload_error|linebreaksbr }}</div>
+      {% endif %}
+      <p class="hint">Formatos permitidos: JPG, PNG. Máx 5 MB.</p>
+    </section>
+
+</section>
+
+    <hr>
+<section class="history-stats">
+      <h3>Estatísticas de Transferência</h3>
+      <div class="stat">
+      <strong>Dados enviados (Upload):</strong>
+      <div>{{ total_upload_human }}</div>
+      </div>
+      <div class="stat">
+      <strong>Dados baixados (Download):</strong>
+      <div>{{ total_download_human }}</div>
+      </div>
+</section>
+
+    <section class="history-log">
+      <h3 style="margin-top: 20px;">Seu Histórico de Arquivos</h3>
+      <ul class="log-list">
+        {% for log in logs %}
+            <li>
+                {{ log.timestamp|date:"d M Y, H:i" }}: 
+                <strong>{{ log.action }}</strong> - 
+                {{ log.file_name }} 
+            </li>
+        {% empty %}
+            <li>Nenhum histórico de transferência encontrado.</li>
+        {% endfor %}
+      </ul>
+    </section>
+    </div> 
+  </body>
+</html>
