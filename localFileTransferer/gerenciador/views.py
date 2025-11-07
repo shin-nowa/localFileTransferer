@@ -6,7 +6,8 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseForbidden, FileResponse, JsonResponse
 from django.urls import reverse
-from .models import TransferLog, UserProfile
+from .models import TransferLog
+from perfil.models import Profile
 
 def is_path_safe(path):
     base_path = os.path.realpath(settings.BASE_DIRECTORY)
@@ -14,7 +15,7 @@ def is_path_safe(path):
     return requested_path.startswith(base_path)
 @login_required
 def browse(request, subpath=''):
-    profile, created = UserProfile.objects.get_or_create(user=request.user)
+    profile, created = Profile.objects.get_or_create(user=request.user)
     base_dir_from_profile = profile.active_directory
     
     items = []
@@ -45,11 +46,15 @@ def browse(request, subpath=''):
     return render(request, 'gerenciador/index.html', context)
 
 @login_required
+def about_page(request):
+    return render(request, 'gerenciador/about.html')
+
+@login_required
 def change_directory(request):
     if request.method == 'POST':
         new_path = request.POST.get('new_path', '')
         if os.path.isdir(new_path):
-            profile, created = UserProfile.objects.get_or_create(user=request.user)
+            profile, created = Profile.objects.get_or_create(user=request.user)
             profile.active_directory = new_path
             profile.save()
             
@@ -57,7 +62,7 @@ def change_directory(request):
 
 @login_required
 def download_file_view(request, filepath):
-    profile, created = UserProfile.objects.get_or_create(user=  request.user)
+    profile, created = Profile.objects.get_or_create(user=  request.user)
     base_dir = profile.active_directory
     full_path = os.path.join(base_dir, filepath)
     
@@ -67,12 +72,13 @@ def download_file_view(request, filepath):
         user=request.user,
         action='DOWNLOAD',
         file_name=os.path.basename(full_path), # Pega só o nome do arquivo
-        ip_address=get_client_ip(request)
+        ip_address=get_client_ip(request),
+        file_size = os.path.getsize(full_path)
     )
     return FileResponse(open(full_path, 'rb'), as_attachment=True)
 
 def download_folder_view(request, folderpath):
-    profile, created = UserProfile.objects.get_or_create(user=request.user)
+    profile, created = Profile.objects.get_or_create(user=request.user)
     base_dir = profile.active_directory
     full_path = os.path.join(base_dir, folderpath)
     if not os.path.realpath(full_path).startswith(os.path.realpath(base_dir)) or not os.path.isdir(full_path):
@@ -93,7 +99,7 @@ def download_folder_view(request, folderpath):
 
 @login_required
 def upload_file_view(request, subpath=''):
-    profile, created = UserProfile.objects.get_or_create(user=request.user)
+    profile, created = Profile.objects.get_or_create(user=request.user)
     base_dir = profile.active_directory
     
     upload_path = os.path.join(base_dir, subpath)
@@ -113,7 +119,8 @@ def upload_file_view(request, subpath=''):
                     user=request.user,
                     action='UPLOAD',
                     file_name=uploaded_file.name,
-                    ip_address=get_client_ip(request)
+                    ip_address=get_client_ip(request),
+                    file_size = uploaded_file.size
                 )
                 return JsonResponse({
                     'success': True,

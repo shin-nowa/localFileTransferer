@@ -15,6 +15,7 @@ class TransferLog(models.Model):
     
     action = models.CharField(max_length=10, choices=ACTIONS_CHOICES)
     file_name = models.CharField(max_length=255)
+    file_size = models.BigIntegerField(default = 0)
     
     #salvando data e hora quando o log for criado
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -25,18 +26,4 @@ class TransferLog(models.Model):
         # o que aparece na lista do adm
         return f"{self.user.username} - {self.action} - {self.file_name}"
     
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
-    
-    active_directory = models.CharField(max_length=2048, null = True, blank = True)
-    
-    def __str__(self):
-        return f"Perfil de {self.user.username}"
-@receiver(post_save, sender = User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-@receiver(post_save, sender = User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.userprofile.save()
 # Create your models here.

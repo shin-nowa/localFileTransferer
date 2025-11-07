@@ -1,0 +1,31 @@
+*{
+    box-sizing: inherit;
+}
+.titleSobre{
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.about-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #cf1892;
+    border-radius: 15px;
+    min-width: 600px;
+    max-width: 800px;
+    padding: 10px;
+    padding-inline: 25px;
+    background-color: rgb(44, 38, 41) !important;
+}
+.about-content p, h2, li, ul{
+    background-color: rgb(44, 38, 41);
+}
+.about-section{
+    background-color: rgb(44, 38, 41);
+}
+.about-content li{
+    list-style: none;
+}
