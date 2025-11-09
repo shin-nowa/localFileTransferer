@@ -101,6 +101,9 @@ li a:hover{
     gap: 15px;
     perspective: 800px;
 }
+.filesUpload h2 {
+    background-color: #111111;
+}
 button{
     color: #f5f5f5;
     border: 2px solid whitesmoke;
@@ -209,6 +212,9 @@ input[type=password]:focus{
     border-radius: 15px;
     border: 3px solid #cf1892;
 }
+#formClass{
+    background-color: rgb(44, 38, 41); ;
+}
 .formLogin form{
     display: flex;
     flex-direction: column;
@@ -217,7 +223,11 @@ input[type=password]:focus{
     width: 100%;
 }
 .formLogin form p {
+    background-color:  rgb(44, 38, 41);
     display: flex;
     flex-direction: column; 
     margin-bottom: 1rem; 
+}
+.formLogin form p label{
+    background-color: rgb(44, 38, 41);;
 }
