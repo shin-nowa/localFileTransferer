@@ -9,6 +9,11 @@
 </head>
 <body>
   <div class="profile-container">
+    <div class="back-button-container">
+          <a href="{% url 'browse_root' %}" class="btn-pink">
+              &larr; Return
+          </a>
+      </div>
     <div class="profile-header">
       <img src="{{ profile_image_url }}" alt="Avatar" class="avatar">
       <div class="user-info">
