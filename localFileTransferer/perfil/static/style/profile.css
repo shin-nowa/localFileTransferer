@@ -1,9 +1,144 @@
-    /* Estilos mínimos locais para a página de perfil */
-    .profile-container { max-width: 900px; margin: 30px auto; padding: 18px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); background:white; }
-    .profile-header { display:flex; gap:20px; align-items:center; }
-    .avatar { width:140px; height:140px; border-radius:6px; object-fit:cover; border:1px solid #ddd; background:#f8f8f8; }
-    .user-info h1 { margin:0; font-size:22px; }
-    .stats { margin-top:18px; display:flex; gap:24px; }
-    .stat { padding:12px; border-radius:6px; border:1px dashed #eee; background:#fafafa; }
-    .upload-form { margin-top:16px; }
-    .error { color: #b00020; margin-top:8px; }
+body {
+    background-color: #111111;
+    color: whitesmoke;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+.back-button-container{
+    margin-bottom: 20px;
+}
+.btn-pink {
+    display: inline-block;
+    text-decoration: none;
+    color: #f5f5f5;
+    border: 2px solid whitesmoke;
+    cursor: pointer;
+    background-color: #cf1892;
+    border-radius: 15px;
+
+    font-size: 1rem;
+    padding: 10px 20px;
+
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    transform: translateZ(0);
+}
+
+.btn-pink:hover {
+    background-color: #772e8a;
+    transform: translateZ(60px);
+}
+.profile-container {
+    max-width: 900px;
+    margin: 30px auto;
+    
+    padding: 40px;
+    border-radius: 15px;
+    background-color: rgb(44, 38, 41);
+    border: 3px solid #cf1892;
+    box-shadow: none;
+}
+
+.profile-header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: inherit; 
+}
+
+.avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 2px solid #555; 
+    background: #333;       
+}
+
+.user-info {
+    background-color: inherit;
+}
+.user-info h1 {
+    margin: 0;
+    font-size: 22px;
+    background-color: inherit;
+}
+.user-info p {
+    background-color: inherit;
+}
+
+.upload-form {
+    margin-top: 16px;
+    background-color: inherit;
+}
+.upload-form h3{
+    background-color: inherit;
+}
+.upload-form p.hint {
+    background-color: inherit;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.profile-container button {
+    color: #f5f5f5;
+    border: 2px solid whitesmoke;
+    cursor: pointer;
+    font-size: 1rem; 
+    width: auto; 
+    padding: 10px 20px; 
+    height: auto;
+    background-color: #cf1892;
+    border-radius: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.profile-container button:hover {
+    background-color: #772e8a;
+}
+
+.stats, .history-stats {
+    margin-top: 18px;
+    display: flex;
+    gap: 24px;
+    background-color: inherit;
+}
+
+.stat {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px dashed #555;
+    background: #333;
+}
+.stat strong, .stat div {
+    background-color: inherit;
+}
+
+.history-log {
+    margin-top: 16px;
+    background-color: inherit;
+}
+.history-log h3 {
+    background-color: inherit;
+}
+.log-list {
+    list-style: disc;
+    padding-left: 20px;
+    background-color: inherit;
+}
+.log-list li {
+    margin-top: 10px;
+    background-color: inherit;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #555;
+    margin: 20px 0;
+}
+
+.error {
+    color: #ff5555;
+    margin-top: 8px;
+    background-color: inherit;
+}
