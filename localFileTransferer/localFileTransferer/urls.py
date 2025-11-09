@@ -21,7 +21,7 @@ from django.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     #rotas de paginas normais vêm primeiro do que a ''
-    path('perfil/', include('perfil.urls')),
+    path('profile/', include('perfil.urls')),
     
     path('', include('gerenciador.urls')),
 ]
