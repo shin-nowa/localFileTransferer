@@ -71,19 +71,6 @@ def profile_view(request):
         profile_image_url = profile.profile_picture.url
     else:
         profile_image_url = settings.STATIC_URL + 'assets/default-user.png'
-
-    def human_readable(bytes_amount):
-        """Converte bytes para string legível MB/GB com duas casas"""
-        try:
-            b = float(bytes_amount)
-        except Exception:
-            b = 0.0
-        if b < 1024**2:
-            return f"{b/1024:.2f} KB"
-        elif b < 1024**3:
-            return f"{b/1024**2:.2f} MB"
-        else:
-            return f"{b/1024**3:.2f} GB"
         
     upload_count = user_logs.filter(action='UPLOAD').count()
     download_count = user_logs.filter(action='DOWNLOAD').count()
