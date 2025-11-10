@@ -1,6 +1,7 @@
 venv/
 .idea/
 media/
+uploads/
 
 __pycache__/
 *.pyc
