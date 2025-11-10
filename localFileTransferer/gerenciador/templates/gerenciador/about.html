@@ -3,53 +3,70 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>About</title>
+    <title>Sobre - Local File Transferer</title>
+
     <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style/about.css' %}">
 </head>
-{% if user.is_authenticated %}
+<body>
+
+    {% if user.is_authenticated %}
     <div class="user-info">
-        <span>Hello, {{ user.username }}!</span>
-        
+        <span>Olá, {{ user.username }}!</span>
+        <a href="{% url 'profiles:profile' %}" class="profile-button">Perfil</a>
         <form action="{% url 'logout' %}" method="post" class="logout-form">
             {% csrf_token %}
-            <button type="submit" class="logout-button">Logout</button>
+            <button type="submit" class="logout-button">Deslogar</button>
         </form>
     </div>
-{% endif %}
-<div class="about-container">
-    <h1 class = "titleSobre">Sobre o Local File Transferer</h1>
-    <div class = container>
-    <div class="about-content">
-        <section class="about-section">
-            <h2>Nossa Missão</h2>
-            <p>O Local File Transferer é uma ferramenta projetada para facilitar a transferência segura de arquivos em sua rede local. 
-               Nossa missão é proporcionar uma experiência simples e eficiente para compartilhamento de arquivos.</p>
-        </section>
+    {% endif %}
 
-        <section class="about-section">
-            <h2>Como Funciona</h2>
-            <p>Nossa plataforma permite que você:</p>
-            <ul>
-                <li>Faça upload de arquivos facilmente</li>
-                <li>Compartilhe arquivos na rede local</li>
-                <li>Gerencie seus arquivos de forma segura</li>
-                <li>Transfira dados rapidamente</li>
-            </ul>
-        </section>
+    <div class="about-page-container">
+        
+        <div class="divList">
+            
+            <div class="back-button-container"> 
+                <a href="{% url 'browse_root' %}" class="btn-pink">
+                    &larr; Voltar
+                </a>
+            </div>
 
-        <section class="about-section">
-            <h2>Recursos</h2>
-            <ul>
-                <li>Interface intuitiva</li>
-                <li>Transferência rápida</li>
-                <li>Segurança local</li>
-                <li>Gerenciamento simples</li>
-            </ul>
-        </section>
+            <div class="about-content">
+                <h1 class="titleSobre">Sobre o Local File Transferer</h1>
 
-        <section class="about-section">
-            <h2>Contato</h2>
-            <p>Para mais informações ou suporte, entre em contato conosco através de nossos canais de comunicação.</p>
-        </section>
+                <section class="about-section">
+                    <h2>Nossa Missão</h2>
+                    <p>O Local File Transferer é uma ferramenta projetada para facilitar a transferência segura de arquivos em sua rede local. 
+                       Nossa missão é proporcionar uma experiência simples e eficiente para compartilhamento de arquivos.</p>
+                </section>
+
+                <section class="about-section">
+                    <h2>Como Funciona</h2>
+                    <p>Nossa plataforma permite que você:</p>
+                    <ul>
+                        <li>Faça upload de arquivos facilmente</li>
+                        <li>Compartilhe arquivos na rede local</li>
+                        <li>Gerencie seus arquivos de forma segura</li>
+                        <li>Transfira dados rapidamente</li>
+                    </ul>
+                </section>
+
+                <section class="about-section">
+                    <h2>Recursos</h2>
+                    <ul>
+                        <li>Interface intuitiva</li>
+                        <li>Transferência rápida</li>
+                        <li>Segurança local</li>
+                        <li>Gerenciamento simples</li>
+                    </ul>
+                </section>
+
+                <section class="about-section">
+                    <h2>Contato</h2>
+                    <p>Para mais informações ou suporte, entre em contato conosco através de nossos canais de comunicação.</p>
+                </section>
+            </div>
+        </div>
     </div>
-</div>
+</body>
+</html>

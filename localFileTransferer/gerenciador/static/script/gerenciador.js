@@ -15,7 +15,7 @@ if (form && fileInput && fileList && statusMessage && fileNameSpan) {
 
         const csrfToken = form.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
-        statusMessage.textContent = "Uploading file...";
+        statusMessage.textContent = "Enviando arquivo...";
 
         const formData = new FormData(form);
 
@@ -37,7 +37,7 @@ if (form && fileInput && fileList && statusMessage && fileNameSpan) {
         })
         .then(data => {
             if (data.success) {
-                statusMessage.textContent = `File "${data.filename}" uploaded successfully!`;
+                statusMessage.textContent = `Arquivo "${data.filename}" enviado com sucesso!`;
 
                 const newLi = document.createElement("li");
                 const newLink = document.createElement("a");
@@ -57,12 +57,12 @@ if (form && fileInput && fileList && statusMessage && fileNameSpan) {
 
                 fileInput.value = "";
             } else {
-                statusMessage.textContent = `Error: ${data.error}`;
+                statusMessage.textContent = `Erro: ${data.error}`;
             }
         })
         .catch((error) => {
             console.error("Error:", error);
-            statusMessage.textContent = "A network error occurred. Please try again."; 
+            statusMessage.textContent = "Um erro de rede aconteceu. Tente novamente"; 
         });
     });
 
@@ -71,7 +71,7 @@ if (form && fileInput && fileList && statusMessage && fileNameSpan) {
         if (fileInput.files.length > 0) {
             fileNameSpan.textContent = fileInput.files[0].name;
         } else {
-            fileNameSpan.textContent = 'No file selected';
+            fileNameSpan.textContent = 'Arquivo não selecionado';
         }
     });
 

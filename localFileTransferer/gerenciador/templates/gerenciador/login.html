@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <title>Login - Local File Transferer</title>
     <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style/corrections.css' %}">
 </head>
 <body class="login-page">
     <div class="containerLogin login-form">
-        <h2>Login</h2>
-        <p>Please login with your credentials.</p>
+        <h2 style= "background-color: #111111;">Login</h2>
+        <p>Insira suas credenciais.</p>
 
         {% if form.errors %}
-            <p class="error-message">User or password incorrect. Try again.</p>
+            <p class="error-message">Usuário ou senha incorreto. Por favor, tente novamente.</p>
         {% endif %}
         <div class="formLogin">
             <form id = "formClass" method="post">
