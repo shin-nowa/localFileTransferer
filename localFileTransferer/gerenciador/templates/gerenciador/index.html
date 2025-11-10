@@ -8,11 +8,12 @@
 <body>
     {% if user.is_authenticated %}
     <div class="user-info">
-        <span>Hello, {{ user.username }}!</span>
-        <a href="{% url 'profiles:profile' %}" class="profile-button">Profile</a>
+        <span>Olá, {{ user.username }}!</span>
+        <a href="{% url 'profiles:profile' %}" class="profile-button">Perfil</a>
         <form action="{% url 'logout' %}" method="post" class="logout-form">
             {% csrf_token %}
-            <button type="submit" class="logout-button">Logout</button>
+            <button type="submit" class="logout-button">Deslogar</button>
+            <a href="{% url 'about' %}" class="profile-button">Sobre</a>
         </form>
     </div>
 {% endif %}
@@ -22,7 +23,7 @@
         <div class="change-dir-container">
             <form action="{% url 'change_dir' %}" method="post">
                 {% csrf_token %}
-                <label for="new_path">Please set the folder path.</label>
+                <label for="new_path">Por favor, escolha o caminho da pasta.</label>
                 <input type="text" name="new_path" id="new_path" value="{{ current_base_directory|default:'' }}" placeholder="Ex: D:/Musics ou C:/Users/Downloads" required>
                 <button class="folderButton" type="submit" title="Change Directory">📂</button>
             </form>
@@ -31,7 +32,7 @@
         {% if current_base_directory %}
             <div class="divList">
                 
-                <h2 class ="index">Index from: /{{ current_base_directory }}</h2>
+                <h2 class ="index">Índice de: /{{ current_base_directory }}</h2>
 
                 {% if current_path %}
                     <div class="back-button-container">
@@ -50,14 +51,14 @@
                             {% endif %}
                         </li>
                     {% empty %}
-                        <li id="empty-folder-message">Empty Folder.</li>
+                        <li id="empty-folder-message">Pasta vazia.</li>
                     {% endfor %}
                 </ul>
             </div>
         {% else %}
             <div class="divList welcome-message">
-                <h2>Welcome!</h2>
-                <p>To get started, paste a folder path above.</p>
+                <h2>Bem vindo!</h2>
+                <p>Para começar, cole o caminho da pasta acima.</p>
             </div>
         {% endif %}
         {% if current_base_directory %}
@@ -65,10 +66,10 @@
                 <form id="upload-form" action="{% url 'upload_file' subpath=current_path %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="filesUpload">
-                        <h2>File Upload</h2>
-                        <label for="file-input" class="file-input-label">Choose File</label>
-                        <span id="file-name">No file selected.</span>
-                        <button type="submit">Upload</button>
+                        <h2>Enviar arquivo</h2>
+                        <label for="file-input" class="file-input-label">Escolher arquivo</label>
+                        <span id="file-name">Arquivo não selecionado.</span>
+                        <button type="submit">Enviar</button>
                     </div>
                     <input type="file" name="file" id="file-input" required>
                 </form>

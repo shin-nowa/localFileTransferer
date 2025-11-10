@@ -124,10 +124,17 @@ body {
     list-style: disc;
     padding-left: 20px;
     background-color: inherit;
+    flex-grow: 1;
+    flex-shrink: 1; 
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 250px;
 }
 .log-list li {
     margin-top: 10px;
     background-color: inherit;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 hr {
