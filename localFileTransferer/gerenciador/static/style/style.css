@@ -67,8 +67,7 @@
 }
 
 .user-info .logout-button:hover {
-    transform: translateZ(60px);
-    background-color: #cf1892;
+    background-color: #772e8a;
 }
 .title{
     font-size: 3rem;
@@ -113,6 +112,9 @@ li a:hover{
     border-radius: 15px;
     border: 3px solid #cf1892;
     transition: transform 1s ease-in-out;
+}
+.divList h2, p{
+    background-color: rgb(44, 38, 41);;
 }
 #file-list {
     background-color: rgb(44, 38, 41);
@@ -234,6 +236,9 @@ input[type=password]:focus{
     background-color: #111111;
     height: 100vh;
 }
+.containerLogin p{
+    background-color: #111111;
+}
 
 .formLogin{
     display: flex;
@@ -248,6 +253,9 @@ input[type=password]:focus{
     border: 3px solid #cf1892;
 }
 #formClass{
+    background-color: rgb(44, 38, 41); ;
+}
+#formClass ul{
     background-color: rgb(44, 38, 41); ;
 }
 .formLogin form{

@@ -4,9 +4,12 @@ body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 20px;
+    overflow-y: hidden;
 }
 .back-button-container{
+    display: flex;
     margin-bottom: 20px;
+    justify-content: space-between;
 }
 .btn-pink {
     display: inline-block;
