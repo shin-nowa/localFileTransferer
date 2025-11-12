@@ -46,7 +46,7 @@
 .about-section li {
     color: #c0c0c0; 
     line-height: 1.6;
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
 .about-section ul {
@@ -76,4 +76,8 @@
 .btn-pink:hover {
     background-color: #772e8a;
     transform: translateZ(20px);
+}
+a{
+    background-color: rgb(44, 38, 41);
+    text-decoration: underline;
 }
