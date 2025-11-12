@@ -63,7 +63,7 @@ Rename the file named `.env.example` to `.env` located on `/localFileTransferer/
 
     > ⚠️ **Important:** DO NOT DELETE `127.0.0.1` or `localhost`. Only add your ip to the list with commas.
 
-    **Exemplo:**
+    **Example:**
     ```ini
     # Before:
     ALLOWED_HOSTS_CSV=,127.0.0.1,localhost, YOUR_IP
