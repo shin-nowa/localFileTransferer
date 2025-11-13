@@ -77,6 +77,7 @@ def download_file_view(request, filepath):
     )
     return FileResponse(open(full_path, 'rb'), as_attachment=True)
 
+@login_required
 def download_folder_view(request, folderpath):
     profile, created = Profile.objects.get_or_create(user=request.user)
     base_dir = profile.active_directory
