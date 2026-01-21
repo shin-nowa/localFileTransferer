@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os, socket
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,8 +30,28 @@ SECRET_KEY = 'django-insecure-fy(9+xl*kulhxp30!23jvxeurdx(5%&44_t+^2_%3%eun)7rz9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-allowed_hosts_str = os.getenv('ALLOWED_HOSTS_CSV', '127.0.0.1, localhost')
-ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',')]
+def get_local_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        # Não conecta inicialmente, apenas tenta descobrir a rota para a internet pra depois jogar pra o allowed hosts
+        s.connect(('8.8.8.8', 80))
+        ip = s.getsockname()[0]
+    except Exception:
+        # Se falhar (sem internet), usa localhost
+        ip = '127.0.0.1'
+    finally:
+        s.close()
+    return ip
+
+MEU_HOST_IP = get_local_ip()
+
+print(f"\n==================================================")
+print(f"O servidor está rodando!")
+print(f"Acesse no celular ou outro dispositivo pelo link: http://{MEU_HOST_IP}:8000")
+print(f"Acesse no seu dispositivo com: http://127.0.0.1:8000")
+print(f"==================================================\n")
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', MEU_HOST_IP]
 
 
 # Application definition
