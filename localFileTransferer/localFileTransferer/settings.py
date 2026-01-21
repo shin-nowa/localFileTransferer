@@ -45,11 +45,12 @@ def get_local_ip():
 
 MEU_HOST_IP = get_local_ip()
 
-print(f"\n==================================================")
-print(f"O servidor está rodando!")
-print(f"Acesse no celular ou outro dispositivo pelo link: http://{MEU_HOST_IP}:8000")
-print(f"Acesse no seu dispositivo com: http://127.0.0.1:8000")
-print(f"==================================================\n")
+# print(f"\n=======================================================================================")
+# print(f"O servidor está rodando!")
+# print(f"Acesse no celular ou outro dispositivo pelo link: http://{MEU_HOST_IP}:8000")
+# print(f"Acesse no seu dispositivo com: http://127.0.0.1:8000")
+# print(f"Para finalizar pressione CTRL + C")
+# print(f"=======================================================================================\n")
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', MEU_HOST_IP]
 

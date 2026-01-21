@@ -15,6 +15,7 @@ db.sqlite3
 .env
 
 *.log
+.configurado
 
 .DS_Store
 Thumbs.db
