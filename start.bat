@@ -62,9 +62,9 @@ echo =======================================================
 echo                    SERVIDOR ONLINE
 echo =======================================================
 echo.
-echo                [PC]           Acesse: http://127.0.0.1:8000
+echo   [PC]        Acesse: http://127.0.0.1:8000
 echo.
-echo  [DISPOSITIVOS NA REDE LOCAL] Acesse: 
+echo  [REDE LOCAL] Acesse: 
 :: pegando o ip do socket pra mostrar no terminal
         python -c "import socket; s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM); s.connect(('8.8.8.8', 80)); print('  http://' + s.getsockname()[0] + ':8000'); s.close()"
 echo.
