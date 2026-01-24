@@ -10,11 +10,20 @@
 ## Local Server for transfering files between devices. ##
 ### Created utilizing Python (Django) ###
 
-
-# 🇧🇷 Utilização #
+# Utilização #
+### Windows ###
 1. Clone o repositório.
 2. Execute o start.bat localizado na pasta raiz.
 
-# 🇺🇸 Usage #
+### Linux ###
+1. Clone o repositório.
+2. Execute o start.sh localizado na pasta raiz.
+
+# Usage #
+### Windows ###
 1. Clone the repository.
-2. Run the start.bat on the root folder
+2. Run start.bat located in the root folder.
+
+### Linux ###
+1. Clone the repository.
+2. Run start.sh located in the root folder.
