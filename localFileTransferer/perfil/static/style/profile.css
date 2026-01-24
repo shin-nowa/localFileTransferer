@@ -1,16 +1,25 @@
+/* --- RESET GLOBAL (Isso corrige o Overflow X) --- */
+* {
+    box-sizing: border-box; /* Garante que padding não aumente a largura */
+}
+
 body {
     background-color: #111111;
     color: whitesmoke;
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 20px;
-    overflow-y: hidden;
+    /* overflow-y: hidden; <--- REMOVI ISSO! Se deixar hidden, você não consegue rolar a tela no celular */
+    overflow-x: hidden; /* Garante que não tenha rolagem lateral */
 }
-.back-button-container{
+
+/* --- ESTILOS PADRÃO (PC) --- */
+.back-button-container {
     display: flex;
     margin-bottom: 20px;
     justify-content: space-between;
 }
+
 .btn-pink {
     display: inline-block;
     text-decoration: none;
@@ -19,34 +28,30 @@ body {
     cursor: pointer;
     background-color: #cf1892;
     border-radius: 15px;
-
     font-size: 1rem;
     padding: 10px 20px;
-
     transition: background-color 0.3s ease, transform 0.2s ease;
-    transform: translateZ(0);
 }
 
 .btn-pink:hover {
     background-color: #772e8a;
-    transform: translateZ(60px);
+    transform: translateZ(0); /* Removi translateZ grande que causava overflow */
 }
+
 .profile-container {
     max-width: 900px;
     margin: 30px auto;
-    
     padding: 40px;
     border-radius: 15px;
     background-color: rgb(44, 38, 41);
     border: 3px solid #cf1892;
-    box-shadow: none;
 }
 
 .profile-header {
     display: flex;
     gap: 20px;
     align-items: center;
-    background-color: inherit; 
+    background-color: inherit;
 }
 
 .avatar {
@@ -54,29 +59,36 @@ body {
     height: 140px;
     border-radius: 6px;
     object-fit: cover;
-    border: 2px solid #555; 
-    background: #333;       
+    border: 2px solid #555;
+    background: #333;
+    flex-shrink: 0; /* Garante que a imagem não amasse */
 }
 
 .user-info {
     background-color: inherit;
 }
+
 .user-info h1 {
     margin: 0;
     font-size: 22px;
     background-color: inherit;
+    word-break: break-all; /* Se o nome for gigante, quebra a linha */
 }
+
 .user-info p {
     background-color: inherit;
 }
 
+/* Upload e Botões */
 .upload-form {
     margin-top: 16px;
     background-color: inherit;
 }
-.upload-form h3{
+
+.upload-form h3 {
     background-color: inherit;
 }
+
 .upload-form p.hint {
     background-color: inherit;
     font-size: 0.9rem;
@@ -87,19 +99,26 @@ body {
     color: #f5f5f5;
     border: 2px solid whitesmoke;
     cursor: pointer;
-    font-size: 1rem; 
-    width: auto; 
-    padding: 10px 20px; 
+    font-size: 1rem;
+    width: auto;
+    padding: 10px 20px;
     height: auto;
     background-color: #cf1892;
     border-radius: 15px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
+
 .profile-container button:hover {
     background-color: #772e8a;
 }
 
-.stats, .history-stats {
+/* Stats */
+.history-stats {
+    background-color: inherit;
+}
+
+.stats-grid {
     margin-top: 18px;
     display: flex;
     gap: 24px;
@@ -111,28 +130,31 @@ body {
     border-radius: 6px;
     border: 1px dashed #555;
     background: #333;
+    flex: 1; /* Faz as caixas ocuparem espaço igual */
 }
+
 .stat strong, .stat div {
     background-color: inherit;
 }
 
+/* Logs */
 .history-log {
     margin-top: 16px;
     background-color: inherit;
 }
+
 .history-log h3 {
     background-color: inherit;
 }
+
 .log-list {
     list-style: disc;
     padding-left: 20px;
     background-color: inherit;
-    flex-grow: 1;
-    flex-shrink: 1; 
-    overflow-y: auto;
-    overflow-x: hidden;
     max-height: 250px;
+    overflow-y: auto;
 }
+
 .log-list li {
     margin-top: 10px;
     background-color: inherit;
@@ -151,4 +173,74 @@ hr {
     color: #ff5555;
     margin-top: 8px;
     background-color: inherit;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (MOBILE)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    
+    body {
+        padding: 10px !important; /* Menos padding na borda da tela */
+    }
+
+    .profile-container {
+        width: 100% !important;
+        margin: 10px 0 !important;
+        padding: 20px 15px !important;
+        border-width: 2px !important;
+    }
+
+    /* 1. Header (Avatar + Nome) vira Coluna */
+    .profile-header {
+        flex-direction: column !important;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .user-info {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* 2. Botões Voltar/Admin ocupam largura total e empilham */
+    .back-button-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-pink {
+        width: 100%;
+        text-align: center;
+        display: block;
+        padding: 15px; /* Botão mais alto para dedo */
+    }
+
+    /* 3. Stats viram Coluna */
+    .stats-grid {
+        flex-direction: column !important;
+        gap: 10px;
+    }
+
+    .stat {
+        width: 100%;
+    }
+
+    /* 4. Inputs e Botões de Upload */
+    .upload-form form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .profile-container button {
+        width: 100% !important;
+        padding: 15px !important;
+        font-size: 1.1rem;
+    }
+
+    input[type="file"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }

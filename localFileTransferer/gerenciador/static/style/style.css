@@ -1,18 +1,21 @@
 @import url(./animation.css);
 @import url(./corrections.css);
 @import url(./about.css);
-@import url(./responsive.css);
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-*{
+
+/* --- RESET E GERAL --- */
+* {
     margin: 0;
-    padding:0;
-    font-family: inter;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
     box-sizing: border-box;
-    background-color: #111111;;
+    background-color: #111111;
     color: whitesmoke;
     text-decoration: none;
 }
-.user-info{
+
+/* --- CABEÇALHO --- */
+.user-info {
     background-color: #111111;
     height: 100px;
     max-width: 100%;
@@ -24,6 +27,7 @@
     perspective: 800px;
     perspective-origin: right center;
 }
+
 .profile-button {
     background-color: #cf1892;
     font-size: 1rem;
@@ -34,23 +38,23 @@
     border-radius: 15px;
     color: #f5f5f5;
     cursor: pointer;
-    
     display: inline-flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .profile-button:hover {
     transition: transform 0.2s ease-in-out, background-color 0.3s ease;
-    background-color:#772e8a;
+    background-color: #772e8a;
     color: #f5f5f5;
 }
 
-.logout-form{
+.logout-form {
     perspective: 800px;
 }
+
 .user-info .logout-button {
     background-color: #cf1892;
     font-size: 1rem;
@@ -59,8 +63,6 @@
     margin-left: 20px;
     transform: translateZ(0);
     transition: transform 0.2s ease-in-out, background-color 0.3s ease;
-    
-    /* Copiado da sua regra 'button' para ficar igual */
     border: 2px solid whitesmoke;
     border-radius: 15px;
     color: #f5f5f5;
@@ -70,10 +72,12 @@
 .user-info .logout-button:hover {
     background-color: #772e8a;
 }
-.title{
+
+.title {
     font-size: 3rem;
 }
-.container{
+
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,25 +87,29 @@
     height: 100vh;
 }
 
-/* Lists */
-ul{
+/* --- LISTAS --- */
+ul {
     list-style: outside;
 }
-li{
+
+li {
     margin-top: 12px;
     transition: transform 0.2s ease-in-out;
 }
-li a{
-    color:#c0c0c0;
+
+li a {
+    color: #c0c0c0;
     transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
-    display: inline-block; 
+    display: inline-block;
 }
-li a:hover{
+
+li a:hover {
     font-size: 1.1rem;
     color: #f1f1f1;
     transform: translateX(10px);
 }
-.divList{ 
+
+.divList {
     display: flex;
     flex-direction: column;
     min-width: 600px;
@@ -114,35 +122,42 @@ li a:hover{
     border: 3px solid #cf1892;
     transition: transform 1s ease-in-out;
 }
-.divList h2, p{
-    background-color: rgb(44, 38, 41);;
+
+.divList h2, p {
+    background-color: rgb(44, 38, 41);
 }
+
 #file-list {
     background-color: rgb(44, 38, 41);
     flex-grow: 1;
-    flex-shrink: 1; 
+    flex-shrink: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    min-height: 200px; 
+    min-height: 200px;
     padding-right: 10px;
 }
-#file-list li a{
+
+#file-list li a {
     display: inline-block;
     overflow-wrap: break-word;
     word-break: break-all;
     max-width: 100%;
 }
-.filesUpload{
+
+/* --- UPLOAD --- */
+.filesUpload {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
     perspective: 800px;
 }
+
 .filesUpload h2 {
     background-color: #111111;
 }
-button{
+
+button {
     color: #f5f5f5;
     border: 2px solid whitesmoke;
     cursor: pointer;
@@ -154,9 +169,11 @@ button{
     transition: background-color 0.3s ease, transform 0.2s ease;
     transform: translateZ(0);
 }
-.folderButton{
+
+.folderButton {
     width: 50px;
 }
+
 .file-input-label {
     cursor: pointer;
     font-size: 1.2rem;
@@ -169,14 +186,17 @@ button{
     margin-right: 10px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
-.file-input-label:hover, button:hover{
+
+.file-input-label:hover, button:hover {
     background-color: #772e8a;
     transform: translateZ(60px);
 }
+
 #file-name {
     color: white;
     font-style: italic;
 }
+
 #file-input {
     width: 0.1px;
     height: 0.1px;
@@ -185,50 +205,54 @@ button{
     position: absolute;
     z-index: -1;
 }
+
 .back-button {
     display: inline-block;
     padding: 8px 15px;
-    background-color: rgb(44, 30, 37);;
+    background-color: rgb(44, 30, 37);
     color: white;
     text-decoration: none;
     border-radius: 8px;
     margin-bottom: 10px;
     transition: background-color 0.3s ease;
 }
+
 .back-button:hover {
     background-color: #7c2c5b;
 }
-input[type=text]{
+
+input[type=text] {
     padding: 10px;
     background-color: rgb(44, 38, 41);
     border-radius: 15px;
     border: 2px solid rgb(196, 196, 196);
-
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-input[type=text]:focus{
+
+input[type=text]:focus {
     outline: none;
     border-color: #cf1892;
 }
-input[type=password]{
+
+input[type=password] {
     padding: 10px;
     background-color: rgb(44, 38, 41);
     border-radius: 15px;
     border: 2px solid rgb(196, 196, 196);
-
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-input[type=password]:focus{
+
+input[type=password]:focus {
     outline: none;
     border-color: #cf1892;
 }
-.upload-section{
+
+.upload-section {
     margin-bottom: 0;
 }
 
-/* LOGIN PAGE */
-
-.containerLogin{
+/* --- LOGIN PAGE --- */
+.containerLogin {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -237,11 +261,12 @@ input[type=password]:focus{
     background-color: #111111;
     height: 100vh;
 }
-.containerLogin p{
+
+.containerLogin p {
     background-color: #111111;
 }
 
-.formLogin{
+.formLogin {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -253,25 +278,127 @@ input[type=password]:focus{
     border-radius: 15px;
     border: 3px solid #cf1892;
 }
-#formClass{
-    background-color: rgb(44, 38, 41); ;
+
+#formClass {
+    background-color: rgb(44, 38, 41);
 }
-#formClass ul{
-    background-color: rgb(44, 38, 41); ;
+
+#formClass ul {
+    background-color: rgb(44, 38, 41);
 }
-.formLogin form{
+
+.formLogin form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
+
 .formLogin form p {
-    background-color:  rgb(44, 38, 41);
+    background-color: rgb(44, 38, 41);
     display: flex;
-    flex-direction: column; 
-    margin-bottom: 1rem; 
+    flex-direction: column;
+    margin-bottom: 1rem;
 }
-.formLogin form p label{
-    background-color: rgb(44, 38, 41);;
+
+.formLogin form p label {
+    background-color: rgb(44, 38, 41);
+}
+
+/* =================
+   RESPONSIVIDADE
+   ================= */
+@media screen and (max-width: 768px) {
+
+    /* Destrava o corpo da página */
+    body {
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    /* Títulos */
+    .title, h1, h2, .titleSobre {
+        font-size: 1.8rem !important;
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    .user-info {
+        flex-direction: column !important;
+        height: auto !important;
+        padding: 20px !important;
+        background: #111;
+        width: 100% !important;
+        box-sizing: border-box;
+        margin-right: 0 !important;
+    }
+
+    .user-info a,
+    .user-info button,
+    .profile-button,
+    .logout-button {
+        width: 100% !important;
+        height: 60px !important;
+        font-size: 1.2rem !important;
+        margin: 5px 0 !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .logout-form { width: 100% !important; }
+
+    /* Configuração do Container Principal */
+    .container {
+        display: block !important;
+        height: auto !important;
+        min-height: 100vh;
+        padding: 10px !important;
+    }
+
+    .divList {
+        width: 100% !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        padding: 20px 15px !important;
+        box-sizing: border-box;
+        height: auto !important;     
+        max-height: 65vh !important;   
+        display: flex !important;   
+        flex-direction: column !important;
+    }
+
+    #file-list {
+        overflow-y: auto !important; 
+        height: auto !important;       
+        max-height: 100% !important;
+        padding-right: 5px;     
+    }
+
+    /* Inputs e Formulários */
+    .change-dir-container, .upload-section {
+        width: 100% !important;
+        padding: 10px 0 !important;
+    }
+
+    input[type="text"], input[type="file"] {
+        width: 100% !important;
+        height: 50px !important;
+        font-size: 16px !important;
+    }
+
+    .folderButton, .filesUpload button {
+        width: 100% !important;
+        height: 50px !important;
+    }
+    
+    .file-input-label {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+        display: block;
+    }
 }
