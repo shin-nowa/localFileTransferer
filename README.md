@@ -2,6 +2,8 @@
 
 <div align="center">
   <img src=".\localFileTransferer\assets\print1.png" alt="Demonstração do Local File Transferer" width="700">
+    <p>
+  <img src = ".\localFileTransferer\assets\terminal.png" alt = "Terminal rodando o serivdor" width = "400px">
 </div>
 
 ## Servidor Local para transferência de arquivos entre dispositivos ##
