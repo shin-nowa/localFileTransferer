@@ -3,7 +3,6 @@
 @import url(./about.css);
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-/* --- RESET E GERAL --- */
 * {
     margin: 0;
     padding: 0;
@@ -12,8 +11,12 @@
     background-color: #111111;
     color: whitesmoke;
     text-decoration: none;
+    /* overflow-y: hidden; */
 }
-
+html, body{
+    max-width: 100%;
+    overflow-x: hidden;
+}
 /* --- CABEÇALHO --- */
 .user-info {
     background-color: #111111;
@@ -23,7 +26,7 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    margin-right: 10vw;
+    margin-right: 10%;
     perspective: 800px;
     perspective-origin: right center;
 }
@@ -81,10 +84,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 20px;
     background-color: #111111;
-    height: 100vh;
+    height: 85vh;
 }
 
 /* --- LISTAS --- */
@@ -115,7 +118,7 @@ li a:hover {
     min-width: 600px;
     max-width: 800px;
     min-height: 0;
-    max-height: 55vh;
+    max-height: 50vh;
     background-color: rgb(44, 38, 41);
     padding: 40px;
     border-radius: 15px;
@@ -126,21 +129,30 @@ li a:hover {
 .divList h2, p {
     background-color: rgb(44, 38, 41);
 }
-
+.index{
+    flex-shrink: 0;
+}
 #file-list {
     background-color: rgb(44, 38, 41);
     flex-grow: 1;
     flex-shrink: 1;
     overflow-y: auto;
-    overflow-x: hidden;
     min-height: 200px;
+    padding-top: 10px;
     padding-right: 10px;
 }
-
+#file-list::-webkit-scrollbar{
+    display: none;
+}
+#file-list li{
+    overflow-x: hidden;
+    /* tirando o scroll horizontal */
+}
 #file-list li a {
     display: inline-block;
     overflow-wrap: break-word;
     word-break: break-all;
+    overflow-x: hidden;
     max-width: 100%;
 }
 
@@ -312,10 +324,13 @@ input[type=password]:focus {
 @media screen and (max-width: 768px) {
 
     /* Destrava o corpo da página */
+    html, body{
+        overflow-x: hidden !important;
+        width: 100%;
+    }
     body {
         padding: 0 !important;
         margin: 0 !important;
-        overflow-x: hidden;
         width: 100%;
     }
 
@@ -327,6 +342,8 @@ input[type=password]:focus {
     }
 
     .user-info {
+        display: flex;
+        font-size: 1rem;
         flex-direction: column !important;
         height: auto !important;
         padding: 20px !important;
@@ -335,68 +352,105 @@ input[type=password]:focus {
         box-sizing: border-box;
         margin-right: 0 !important;
     }
+    .profile-button {
+        max-width: 50vw;
+        margin-left: 0;
+        border: 2px solid whitesmoke;
+        border-radius: 15px;
+        color: #f5f5f5;
+        cursor: pointer;
+        display: block;
+        align-items: center;
+    }
 
     .user-info a,
-    .user-info button,
-    .profile-button,
-    .logout-button {
+    .user-info button{
         width: 100% !important;
         height: 60px !important;
         font-size: 1.2rem !important;
-        margin: 5px 0 !important;
+        margin: 2vw 0px !important;
         display: flex !important;
         align-items: center;
         justify-content: center;
     }
+    .logout-button {
+        max-width: 50vw;
+        width: 100% !important; 
+        margin: 3vw 0px !important; 
+    }
     
-    .logout-form { width: 100% !important; }
+    .logout-form { 
+        display: contents;
+        width: 50vw !important;
+     }
 
     /* Configuração do Container Principal */
     .container {
         display: block !important;
-        height: auto !important;
+        width: 100% !important;
         min-height: 100vh;
-        padding: 10px !important;
+        padding-inline: 10px !important;
     }
 
-    .divList {
-        width: 100% !important;
+  .divList {
         min-width: 0 !important;
-        margin: 0 !important;
-        padding: 20px 15px !important;
-        box-sizing: border-box;
-        height: auto !important;     
-        max-height: 65vh !important;   
-        display: flex !important;   
-        flex-direction: column !important;
-    }
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 20px !important;
+        margin-inline: auto !important;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+  }
 
     #file-list {
         overflow-y: auto !important; 
         height: auto !important;       
         max-height: 100% !important;
-        padding-right: 5px;     
+        padding: 15px 10px;    
+    }
+    li a:hover{
+        transform: none;
     }
 
-    /* Inputs e Formulários */
-    .change-dir-container, .upload-section {
+    .change-dir-container{
+        display: flex !important; 
+        flex-direction: column;
         width: 100% !important;
-        padding: 10px 0 !important;
+        padding: 15px 0 !important;
+        align-items: center;
+        /* gap: 15px; */
+        margin-bottom: 10px;
+    }
+    .change-dir-container form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }   
+    .folderButton{
+        width: 15%;
+        margin-inline: 5%;
+    }
+    #new_path{
+        width: 35%;
     }
 
-    input[type="text"], input[type="file"] {
+
+    input[type="file"] {
         width: 100% !important;
         height: 50px !important;
         font-size: 16px !important;
     }
 
-    .folderButton, .filesUpload button {
-        width: 100% !important;
+    .filesUpload button {
+        align-items: center;
+        width: 50% !important;
         height: 50px !important;
     }
     
     .file-input-label {
-        width: 100%;
+        width: 50%;
         text-align: center;
         padding: 15px;
         display: block;
