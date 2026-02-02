@@ -91,9 +91,18 @@ def download_folder_view(request, folderpath):
             for file in files:
                 file_path = os.path.join(root, file)
                 zf.write(file_path, os.path.relpath(file_path, full_path))
-    
+
+    total_size = memory_file.getbuffer().nbytes #salvando o tamanho do zip criado na memoria ram
+
     memory_file.seek(0)
-    
+
+    TransferLog.objects.create(
+        user=request.user,
+        action='DOWNLOAD',
+        file_name=f"{os.path.basename(folderpath)}.zip", 
+        ip_address=get_client_ip(request),
+        file_size=total_size #salvando pra colocar no perfil
+    )
     response = HttpResponse(memory_file, content_type='application/zip')
     response['Content-Disposition'] = f'attachment; filename="{os.path.basename(folderpath)}.zip"'
     return response
