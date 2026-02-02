@@ -387,12 +387,14 @@ input[type=password]:focus {
     /* Configuração do Container Principal */
     .container {
         display: block !important;
-        width: 100% !important;
+        width: auto !important;
         min-height: 100vh;
         padding-inline: 10px !important;
     }
 
   .divList {
+        max-height: none !important; 
+        height: auto !important;
         min-width: 0 !important;
         width: 100% !important;
         max-width: 100% !important;
@@ -435,12 +437,11 @@ input[type=password]:focus {
     #new_path{
         width: 35%;
     }
-
-
     input[type="file"] {
         width: 100% !important;
         height: 50px !important;
         font-size: 16px !important;
+        position: relative !important;
     }
 
     .filesUpload button {
