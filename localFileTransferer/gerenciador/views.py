@@ -22,6 +22,11 @@ def browse(request, subpath=''):
     parent_path = None
     
     if base_dir_from_profile:
+        if not os.path.isdir(base_dir_from_profile):
+            try:
+                os.makedirs(base_dir_from_profile, exist_ok=True)
+            except OSError:
+                return HttpResponseForbidden("Server error: Unable to create profile directory.")
         current_path = os.path.join(base_dir_from_profile, subpath)
         if not os.path.realpath(current_path).startswith(os.path.realpath(base_dir_from_profile)):
             return HttpResponseForbidden("Access denied.")

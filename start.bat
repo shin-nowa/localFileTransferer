@@ -71,7 +71,7 @@ echo.
 echo =======================================================
 echo  (Para desligar, feche esta janela ou pressione CTRL + C)
 
-python manage.py runserver 0.0.0.0:8000 --noreload >nul 2>&1
+python manage.py runserver 0.0.0.0:8000 --noreload
 
 if %ERRORLEVEL% NEQ 0 (
     echo.
